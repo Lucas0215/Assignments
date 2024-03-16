@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DB Trading Site</title>
+</head>
+<body>
+
+Your balance : {{buyer[1]}}<br>
+Your rating : {{buyer[2]}}<br><br>
+Total price : {{totalPrice}}<br>
+Discount price : {{discountPrice}} {% if extra=="5.0" %} today's item (+5.0%) {% endif %}<br>
+===========================================<br>
+Final Price : {{finalPrice}}
+
+<form action="/buy" method="post">
+    <input type="submit" name="confirm" value="confirm">
+    <input type="hidden" name="code" value={{item_info[0]}}>
+    <input type="hidden" name="name" value={{item_info[1]}}>
+    <input type="hidden" name="price" value={{item_info[2]}}>
+    <input type="hidden" name="stock" value={{item_info[3]}}>
+    <input type="hidden" name="seller" value={{item_info[4]}}>
+    <input type="hidden" name="buyer" value={{buyer[0]}}>
+    <input type="hidden" name="sellerPrice" value={{totalPrice}}>
+    <input type="hidden" name="buyerPrice" value={{finalPrice}}>
+    <input type="hidden" name="num" value={{num}}>
+</form>
+
+
+<form action="/return_home" method="post">
+    <input type="submit" name="send" value="cancel">
+    <input type="hidden" name="user_id" value={{buyer[0]}}>
+</form>
+</body>
+</html>

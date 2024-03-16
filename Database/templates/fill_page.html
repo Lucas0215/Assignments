@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DB Trading Site</title>
+</head>
+<body>
+<h2>Charge Page</h2>
+
+<form action="/fill_balance_confirm" method="post">
+    <label for="amount">charge amount : </label>
+    <input id="amount" type="text" name="amount" value="">
+    <input type="hidden" name="user" value={{user}}>
+    <input type="hidden" name="balance" value={{balance}}>
+    <input type="submit" name="confirm" value="confirm">
+</form>
+
+<form action="/return_home" method="post">
+    <input type="submit" name="send" value="cancel">
+    <input type="hidden" name="user_id" value={{user}}>
+</form>
+
+</body>
+</html>

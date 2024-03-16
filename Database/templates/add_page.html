@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DB Trading Site</title>
+</head>
+<body>
+
+<h3>CATEGORY LIST</h3>
+<table border="1">
+    <tbody>
+        {% for category in categories %}
+        <tr>
+            <td>{{category[0]}}</td>
+            <td>{{category[1]}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<form action="/add" method="post">
+    <label for="code">Code :</label>
+    <input id="code", type="text", name="code", value=""><br>
+    <label for="name">Name:</label>
+    <input id="name", type="text", name="name", value=""><br>
+    <label for="price">Price :</label>
+    <input id="price", type="text", name="price", value=""><br>
+    <label for="stock">Stock:</label>
+    <input id="stock", type="text", name="stock", value=""><br>
+    <input type="submit" name="add" value="add"><br>
+    <input type="hidden" name="seller" value={{user}}>
+</form>
+
+<form action="/return_home" method="post">
+    <input type="submit" name="send" value="cancel">
+    <input type="hidden" name="user_id" value={{user}}>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DB Trading Site</title>
+</head>
+<body>
+<h1>DB Trading Site</h1>
+==========================================<br>
+{% if user_info[0]=="admin" %}
+admin function<br><br>
+    <form action="/showInfo" method="post">
+        <input type="submit" name="send" value="users info">
+        <input type="submit" name="send" value="trades info">
+    </form>
+==========================================<br>
+{% endif %}
+
+<table border="1">
+        <thead>
+            <th>popular category</th>
+            <th>best buyer</th>
+            <th>best seller</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ trade_info[0] }}</td>
+                <td>{{ trade_info[1] }}</td>
+                <td>{{ trade_info[2] }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+current user : {{ user_info[0] }}<br>
+balance : {{ user_info[1] }}<br>
+rating : {{ user_info[2] }}<br>
+<form action="/my_page" method="post">
+    <input type="submit" name="my_page" value="My Page">
+    <input type="hidden" name="user" value="{{user_info[0]}}">
+</form>
+<form action="/return" method="post">
+    <input type="submit" name="send" value="logout">
+</form>
+
+<h3>ITEMS</h3>
+<form action="/add_page" method="post">
+    <input type="submit" name="add" value="add">
+    <input type="hidden" name="user_id" value={{user_info[0]}}>
+</form>
+<table border="1">
+        <thead>
+            <th>code</th>
+            <th>name</th>
+            <th>price</th>
+            <th>stock</th>
+            <th>seller</th>
+            <th></th>
+        </thead>
+        <tbody>
+            {% for item in items_info %}
+            <tr>
+                <td>{{ item[0] }}</td>
+                <td>{{ item[1] }}</td>
+                <td>{{ item[2] }}</td>
+                <td>{{ item[3] }}</td>
+                <td>{{ item[4] }}</td>
+                <td><form action="/buy_page" method="post">
+                    <input type="submit" name="buy" value="buy">
+                    <input type="hidden" name="user_id" value={{user_info[0]}}>
+                    <input type="hidden" name="code" value={{item[0]}}>
+                    <input type="hidden" name="name" value={{item[1]}}>
+                    <input type="hidden" name="price" value={{item[2]}}>
+                    <input type="hidden" name="stock" value={{item[3]}}>
+                    <input type="hidden" name="seller" value={{item[4]}}>
+                    <input type="hidden" name="extra" value="0.0">
+                </form></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+</table>
+
+<h3>ADVERTISEMENT</h3>
+today's item! 5% additional discount!
+<table border="1">
+        <thead>
+            <th>code</th>
+            <th>name</th>
+            <th>price</th>
+            <th>stock</th>
+            <th>seller</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ advertise[0][0] }}</td>
+                <td>{{ advertise[0][1] }}</td>
+                <td>{{ advertise[0][2] }}</td>
+                <td>{{ advertise[0][3] }}</td>
+                <td>{{ advertise[0][4] }}</td>
+                <td><form action="/buy_page" method="post">
+                    <input type="submit" name="buy" value="buy">
+                    <input type="hidden" name="user_id" value={{user_info[0]}}>
+                    <input type="hidden" name="code" value={{advertise[0][0]}}>
+                    <input type="hidden" name="name" value={{advertise[0][1]}}>
+                    <input type="hidden" name="price" value={{advertise[0][2]}}>
+                    <input type="hidden" name="stock" value={{advertise[0][3]}}>
+                    <input type="hidden" name="seller" value={{advertise[0][4]}}>
+                    <input type="hidden" name="extra" value="5.0">
+                </form></td>
+            </tr>
+        </tbody>
+</table>
+
+</body>
+</html>

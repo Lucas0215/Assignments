@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>info</title>
+</head>
+<body>
+{% if type=="users info" %}
+    <table border="1">
+        <thead>
+            <th>id</th>
+            <th>password</th>
+        </thead>
+        <tbody>
+            {% for info in infos %}
+            <tr>
+                <td>{{ info[0] }}</td>
+                <td>{{ info[1] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <table border="1">
+        <thead>
+            <th>buyer</th>
+            <th>seller</th>
+            <th>code</th>
+            <th>trade_price</th>
+        </thead>
+        <tbody>
+            {% for info in infos %}
+            <tr>
+                <td>{{ info[0] }}</td>
+                <td>{{ info[1] }}</td>
+                <td>{{ info[2] }}</td>
+                <td>{{ info[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+<form action="/return_home" method="post">
+    <input type="submit" name="send" value="return">
+    <input type="hidden" name="user_id" value="admin">
+</form>
+
+</body>
+</html>

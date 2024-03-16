@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DB Trading Site</title>
+</head>
+<body>
+<h1>My Page</h1>
+=================================================
+<h4>User Info</h4>
+ <table border="1">
+     <tbody>
+     <tr>
+         <td>user id</td>
+         <td>balance</td>
+         <td>current rating</td>
+         <td>next rating</td>
+         <td>benefit</td>
+         <td>need money</td>
+         <td>fill balance</td>
+     </tr>
+     <tr>
+         <td>{{ user_info[0] }}</td>
+         <td>{{ user_info[1] }}</td>
+         <td>{{ user_info[2] }}</td>
+         <td>{{next_rating[0]}}</td>
+         <td>{{next_rating[2]}}% discount for purchase</td>
+         <td>{{need_money}}</td>
+         <td><form action="/fill_balance" method="post">
+             <input type="submit" name="fill" value="charge">
+             <input type="hidden" name="user" value={{user_info[0]}}>
+             <input type="hidden" name="balance" value={{user_info[1]}}>
+         </form></td>
+     </tbody>
+ </table>
+=================================================
+<h4>Trade Info</h4>
+
+Buy List<br>
+best friend : {{best_buy_friend[0]}}  |  total trade : {{best_buy_friend[1]}}
+<table border="1">
+    <thead>
+        <td>total buy number</td>
+        <td>total buy amount</td>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{buy_amount[0][0]}}</td>
+        <td>{{buy_amount[0][1]}}</td>
+    </tr>
+    </tbody>
+</table>
+<table border="1">
+    <thead>
+        <td>seller</td>
+        <td>code</td>
+        <td>trade_price</td>
+    </thead>
+    <tbody>
+    {% for buy in buy_list %}
+    <tr>
+        <td>{{ buy[1] }}</td>
+        <td>{{ buy[2] }}</td>
+        <td>{{ buy[3] }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+
+ </table><br>
+Sell List<br>
+best friend : {{best_sell_friend[0]}}  |  total trade : {{best_sell_friend[1]}}
+<table border="1">
+    <thead>
+        <td>total sell number</td>
+        <td>total sell amount</td>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{sell_amount[0][0]}}</td>
+        <td>{{sell_amount[0][1]}}</td>
+    </tr>
+    </tbody>
+</table>
+<table border="1">
+    <thead>
+        <td>buyer</td>
+        <td>code</td>
+        <td>trade_price</td>
+    </thead>
+    <tbody>
+    {% for sell in sell_list %}
+    <tr>
+        <td>{{ sell[0] }}</td>
+        <td>{{ sell[2] }}</td>
+        <td>{{ sell[3] }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+ </table>
+
+<form action="/return_home" method="post">
+    <input type="submit" name="send" value="return">
+    <input type="hidden" name="user_id" value={{user_info[0]}}>
+</form>
+
+</body>
+</html>
